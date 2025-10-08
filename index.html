@@ -2,34 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dwnld...</title>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
+        /* Делаем фон черным и убираем все отступы */
+        html, body {
             background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loader {
-            border: 8px solid #333; /* Цвет основного круга */
-            border-top: 8px solid #fff; /* Цвет вращающейся части */
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
-    <div class="loader"></div>
+    <script>
+        // Эта функция запускается, когда страница полностью загружена
+        window.onload = function() {
+            // Имя файла, который лежит в том же репозитории
+            const fileName = 'report.txt';
+
+            // Создаем временную невидимую ссылку
+            const a = document.createElement('a');
+            a.href = fileName;
+            a.download = fileName; // Этот атрибут заставляет браузер скачивать файл
+
+            // Добавляем ссылку на страницу, "нажимаем" на нее и сразу удаляем
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+    </script>
 </body>
 </html>
