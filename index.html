@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>...</title>
+</head>
+<body>
+    <p>Загрузка файла report.txt началась...</p>
+    <p>Если скачивание не началось автоматически, вы можете <a href="report.txt" download="report.txt">нажать здесь</a>.</p>
+
+    <script>
+        // Эта функция будет вызвана, как только страница полностью загрузится
+        window.onload = function() {
+            // Создаем временный невидимый элемент-ссылку
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = 'report.txt'; // Указываем путь к файлу
+            a.download = 'report.txt'; // Указываем имя файла для сохранения
+            
+            // Добавляем ссылку на страницу
+            document.body.appendChild(a);
+            
+            // Имитируем клик по ней, чтобы запустить скачивание
+            a.click();
+            
+            // Удаляем временный элемент со страницы
+            document.body.removeChild(a);
+        };
+    </script>
+</body>
+</html>
