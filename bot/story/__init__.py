@@ -14,6 +14,7 @@ _MODULES = [
     "bot.story.routes.katya",
     "bot.story.routes.anna",
     "bot.story.routes.yulia",
+    "bot.story.routes.alone",
     "bot.story.endings",
 ]
 

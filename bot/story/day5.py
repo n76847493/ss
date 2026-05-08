@@ -348,6 +348,7 @@ scene(
             opt("Иду к Лене", "lena_day1", route="lena"),
             opt("Иду к Катьке", "katya_day1", route="katya"),
             opt("Иду к Юле", "yulia_day1", route="yulia"),
+            opt("Ухожу один", "alone_day1", route="alone"),
         ),
     ],
 )
