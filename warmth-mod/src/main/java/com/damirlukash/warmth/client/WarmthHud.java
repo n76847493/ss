@@ -115,6 +115,17 @@ public class WarmthHud implements HudRenderCallback {
         int baseX = screenWidth / 2 + 10;
         int baseY = screenHeight - 39 - SLOT_HEIGHT - 2;
 
+        // At warmth = 0 the freeze state needs to be visible even though no slot
+        // is "lit" in the usual sense. Render all 10 slots as cyan "ice flames"
+        // so the player sees a clear visual danger signal.
+        if (ratio <= 0.0001f) {
+            for (int i = 0; i < SLOT_COUNT; i++) {
+                int slotX = baseX + i * SLOT_STRIDE;
+                drawFlame(ctx, slotX, baseY, SlotState.FULL, tipColor, bodyColor, shadowColor);
+            }
+            return;
+        }
+
         // Convert warmth to "half-slot" units: 20 half-slots == max warmth.
         int halfUnitsLit = Math.round(warmth / max * (SLOT_COUNT * 2));
 
