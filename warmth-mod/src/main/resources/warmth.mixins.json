@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.damirlukash.warmth.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerEntityWarmthMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
