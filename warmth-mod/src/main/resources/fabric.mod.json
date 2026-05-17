@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "warmth",
+  "version": "${version}",
+  "name": "Warmth",
+  "description": "Adds a temperature/warmth bar — survive the cold, find shelter, stay near fire.",
+  "authors": [
+    "damirlukash2"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/warmth/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.damirlukash.warmth.WarmthMod"
+    ],
+    "client": [
+      "com.damirlukash.warmth.client.WarmthClient"
+    ]
+  },
+  "mixins": [
+    "warmth.mixins.json",
+    {
+      "config": "warmth.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}
