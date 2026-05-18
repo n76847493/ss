@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block content %}
+<h3>Withdrawal queue</h3>
+<table>
+    <tr>
+        <th>ID</th><th>User</th><th>Chain</th><th>Asset</th><th>Amount</th><th>Address</th>
+        <th>Status</th><th>Approved</th><th>Created</th><th>Actions</th>
+    </tr>
+    {% for r in reqs %}
+    <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.user_id }}</td>
+        <td>{{ r.chain.value }}</td>
+        <td>{{ r.asset.value }}</td>
+        <td><code>{{ '%.8f'|format(r.amount) }}</code></td>
+        <td><code>{{ r.address[:36] }}</code></td>
+        <td>{{ r.status.value }}</td>
+        <td>{{ 'yes' if r.admin_approved else '' }}</td>
+        <td>{{ r.created_at.strftime('%m-%d %H:%M') }}</td>
+        <td>
+            {% if r.status == TxStatus.PENDING %}
+            <form method="post" action="/withdrawals/{{ r.id }}/approve">
+                <button>Approve</button>
+            </form>
+            <form method="post" action="/withdrawals/{{ r.id }}/cancel">
+                <button class="danger">Cancel</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<p style="margin-top:14px; color:#607d8b; font-size:12px">
+    Approving sets <code>admin_approved=true</code>. The worker will broadcast the
+    transaction on the next tick using the operator's hot wallet key. If a chain
+    adapter is offline (no RPC), approval is recorded but the request remains
+    pending until the operator broadcasts manually and updates the txid here or via
+    the model.
+</p>
+{% endblock %}

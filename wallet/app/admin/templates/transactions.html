@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block content %}
+<h3>Transactions (latest 200)</h3>
+<table>
+    <tr>
+        <th>ID</th><th>User</th><th>Type</th><th>Status</th><th>Chain</th><th>Asset</th>
+        <th>Amount</th><th>From</th><th>To</th><th>Tx</th><th>Created</th>
+    </tr>
+    {% for t in txs %}
+    <tr>
+        <td>{{ t.id }}</td>
+        <td>{{ t.user_id }}</td>
+        <td>{{ t.type.value }}</td>
+        <td>{{ t.status.value }}</td>
+        <td>{{ t.chain.value }}</td>
+        <td>{{ t.asset.value }}</td>
+        <td><code>{{ '%.8f'|format(t.amount) }}</code></td>
+        <td><code>{{ (t.address_from or '')[:18] }}</code></td>
+        <td><code>{{ (t.address_to or '')[:18] }}</code></td>
+        <td><code>{{ (t.txid or '')[:16] }}</code></td>
+        <td>{{ t.created_at.strftime('%m-%d %H:%M') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
