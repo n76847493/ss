@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+{% block content %}
+<div class="cards">
+    <div class="card"><div class="label">Users</div><div class="value">{{ users }}</div></div>
+    <div class="card"><div class="label">Addresses</div><div class="value">{{ addresses }}</div></div>
+    <div class="card"><div class="label">Transactions</div><div class="value">{{ transactions }}</div></div>
+    <div class="card"><div class="label">Pending withdrawals</div><div class="value">{{ pending }}</div></div>
+</div>
+
+<h3>Aggregate balances (off-chain ledger)</h3>
+<table>
+    <tr><th>Chain</th><th>Asset</th><th>Total</th><th>Locked</th></tr>
+    {% for t in totals %}
+    <tr>
+        <td>{{ t.chain }}</td>
+        <td>{{ t.asset }}</td>
+        <td><code>{{ '%.8f'|format(t.total) }}</code></td>
+        <td><code>{{ '%.8f'|format(t.locked) }}</code></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

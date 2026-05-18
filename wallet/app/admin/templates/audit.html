@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+{% block content %}
+<h3>Audit log (latest 500)</h3>
+<table>
+    <tr><th>ID</th><th>User</th><th>Event</th><th>Payload</th><th>IP</th><th>Created</th></tr>
+    {% for r in rows %}
+    <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.user_id or '' }}</td>
+        <td>{{ r.event }}</td>
+        <td><code>{{ (r.payload or '')[:120] }}</code></td>
+        <td>{{ r.ip or '' }}</td>
+        <td>{{ r.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
